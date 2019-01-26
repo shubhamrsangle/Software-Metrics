@@ -1,0 +1,17 @@
+C c
+CPP cpp
+Java java
+Python py
+Javascript js
+PHP php
+Csharp cs
+CSS css
+HTML html htm
+ActionScript as
+Perl pl
+PostScript ps
+Clojure clj
+Erlang erl
+Go go
+Haskell hs
+Ruby rb
