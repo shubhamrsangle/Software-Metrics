@@ -6,7 +6,7 @@ Software Metrics to be implemented (Language Independent):
 # Counting metrics:-
 shubham 1. Lines Of Code (LOC)  -----------------completed 
 
-shubham 2. McCabe's Cyclomatic Complexity
+shubham 2. McCabe's Cyclomatic Complexity 
 
 shubham 3. Comment Lines        -----------------completed 
 
@@ -14,7 +14,7 @@ Ayush   4. Fan-in, Fan-out
 
 Ayush   5. Henry-Kafura Measure
 
-Shubham 6. Number of Modules
+Shubham 6. Number of Modules   -------------------completed
 
 Shubham 7. Weighted Methods per Class
 
