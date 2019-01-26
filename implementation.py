@@ -9,6 +9,7 @@ def driver(l,p):
     LOC(lang,data)
     NOM(lang,data)
     print(WMC(lang,data))
+    fanOut(lang,data)
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -96,8 +97,39 @@ def WMC(lang,data):
             mod=mod.split(' ')
             dic[mod[0]]=len(functions)
         return dic
-            
-        
+  
+def fanOut(lang,data):
+    n=0
+    fanout=0
+    if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
+        prog = data.split('\r\n')
+        for i,line in enumerate(prog):
+            fndef = re.search("[\w]+\(.*\)\{", line)
+            if fndef != None:
+                for ln in prog[i+1:]:
+                    if ln == '}':
+                        break
+                    else:
+                        fncall = re.search("[\w]+\(.*\);",ln)
+                        if fncall != None:
+                            fanout += 1
+    elif lang=='python':
+        prog = data.split('\r\n')
+        for i,line in enumerate(prog):
+            fndef = re.search("[\w]+\(.*\):", line)
+            if fndef != None:
+                for j in prog[i+1:]:
+                    if j[:1] != '\t':
+                        break
+                    else:
+                        fncall = re.search("[\w]+\(.*\)$",j)
+                        if fncall != None:
+                            fanout += 1
+    print('Fan out metrics: '+str(fanout))  
+    
+    
+    
+
 '''def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
         
