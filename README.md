@@ -16,7 +16,7 @@ Ayush   5. Henry-Kafura Measure
 
 Shubham 6. Number of Modules   -------------------completed
 
-Shubham 7. Weighted Methods per Class
+Shubham 7. Weighted Methods per Class -----------------completed(All methods of weight 1)
 
 Ayush   8. Rejected Lines
 
