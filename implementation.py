@@ -1,6 +1,5 @@
 import re
 
-
 def driver(l,p):
     lang=l
     path=p
@@ -8,8 +7,8 @@ def driver(l,p):
     data=f.read()
     ncom,loc,program=LOC(lang,data)
     LOC(lang,data)
-    print(NOM(lang,data))
-
+    NOM(lang,data)
+    print(WMC(lang,data))
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -48,7 +47,7 @@ def NOM(lang,data):
         nom=nstruct+nclass+outmethods
         return nom,nstruct,nclass,outmethods
     elif lang=='java' or lang=='csharp':
-        classnum=data.count("class ")
+        classnum=data.count("class ")+data.count('interface')
         return classnum,0,classnum,0
     elif lang=='javascript':
         funct=data.count('function ')
@@ -56,21 +55,49 @@ def NOM(lang,data):
     elif lang=='python':
         funct=data.count('class ')
         return funct
-    
-        
 
+def WMC(lang,data):
+    if lang=='python':
+        dic={}
+        a=re.compile("class\s*",re.DOTALL)
+        data=a.split(data)
+        data=data[1:]
+        for mod in data:
+            ind=mod.index(':')
+            classname=mod[:index]
+            dic[classname]=mod.count('def')
+        return dic
+    elif lang=='c' or lang=='cpp' or lang=='php':
+        dic={}
+        a=re.compile("class.*?}\n*\s*;",re.DOTALL)
+        ans= a.findall(data)
+        for mod in ans:
+            tmp=mod.split(' ')
+            classname=tmp[1]
+            c=re.compile("\(.*?\)\n*\s*;",re.DOTALL)
+            functions=c.findall(mod)
+            d=re.compile("\(.*?\)\n*\s*{",re.DOTALL)
+            functions1=d.findall(mod)
+            dic[classname]=len(functions)+len(functions1)-mod.count("scanf")-mod.count("printf")
+        return dic
+    elif lang=='javascript':
+        dic={}
+        dic["OUTSIDE"]= data.count('function ')
+        return dic
+    elif lang=='java' or lang=='csharp':
+        dic={}
+        data.replace("interface","class")
+        a=re.compile("class\s*",re.DOTALL)
+        data=a.split(data)
+        data=data[1:]
+        for mod in data:
+            a=re.compile("\(.*?\)\n*\s*{",re.DOTALL)
+            functions=a.findall(mod)
+            mod=mod.split(' ')
+            dic[mod[0]]=len(functions)
+        return dic
+            
         
-        
-        
-        
-        
-        
-    
-
-
-
-
-
 '''def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
         
