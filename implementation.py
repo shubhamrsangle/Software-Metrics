@@ -7,7 +7,8 @@ def driver(l,p):
     f=open(path)
     data=f.read()
     ncom,loc,program=LOC(lang,data)
-    print(LOC(lang,data))
+    LOC(lang,data)
+    print(NOM(lang,data))
 
 
 def LOC(lang,data):
@@ -19,7 +20,7 @@ def LOC(lang,data):
         program=program.strip().split(';')
         LOC=len(program)-1
         return Ncom,LOC,program[:-1]
-    elif lang=='py':
+    elif lang=='python':
         Ncom=(data.count("'''")//2)+data.count("#")
         program=re.sub(re.compile("\'\'\'.*?\'\'\'",re.DOTALL),"",data)
         program=re.sub(re.compile("#.*?\n"),"" ,program)
@@ -27,6 +28,42 @@ def LOC(lang,data):
         program=program.strip().split('\n')
         LOC=len(program)-1
         return Ncom,LOC,program[:-1]
+
+def NOM(lang,data):
+    data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
+    data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
+    if lang=='c' or lang=='cpp' or lang=='php':
+        a=re.compile("class.*?}\s*;",re.DOTALL)
+        ans= a.findall(data)
+        data=re.sub(a,"",data)
+        b=re.compile("struct.*?}\s*;",re.DOTALL)
+        ans1=b.findall(data)
+        data=re.sub(b,"",data)
+        nstruct=len(ans)
+        nclass=len(ans1)
+        c=re.compile("\)\s*\n*{.*?}",re.DOTALL)
+        functions=c.findall(data)
+        scope=data.count("::")
+        outmethods=len(functions)-scope
+        nom=nstruct+nclass+outmethods
+        return nom,nstruct,nclass,outmethods
+    elif lang=='java' or lang=='csharp':
+        classnum=data.count("class ")
+        return classnum,0,classnum,0
+    elif lang=='javascript':
+        funct=data.count('function ')
+        return funct,0,0,funct
+    elif lang=='python':
+        funct=data.count('class ')
+        return funct
+    
+        
+
+        
+        
+        
+        
+        
         
     
 
