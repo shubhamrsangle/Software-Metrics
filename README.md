@@ -6,7 +6,7 @@ Software Metrics to be implemented (Language Independent):
 # Counting metrics:-
 shubham 1. Lines Of Code (LOC)  -----------------completed 
 
-shubham 2. McCabe's Cyclomatic Complexity 
+shubham 2. McCabe's Cyclomatic Complexity        -----------------completed 
 
 shubham 3. Comment Lines        -----------------completed 
 
