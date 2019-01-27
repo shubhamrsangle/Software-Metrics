@@ -132,9 +132,32 @@ def cyclometric(lang,data):
     cyclo=0
     prog = data.split('\r\n')
     for i,line in enumerate(prog):
-        fndef = re.search("(if|while|for|switch|break|&&|\|\||elif|else)", line)
-        if fndef != None:
+        ln = re.search("if", line)
+        if ln != None:
             cyclo+=1
+        ln = re.search("while", line)
+        if ln != None:
+            cyclo+=1
+        ln = re.search("for", line)
+        if ln != None:
+            cyclo+=1
+        ln = re.search("switch", line)
+        if ln != None:
+            cyclo+=1
+        ln = re.search("break", line)
+        if ln != None:
+            cyclo+=1
+        ln = re.search("&&", line)
+        if ln != None:
+            cyclo+=1
+        ln = re.search("\|\|", line)
+        if ln != None:
+            cyclo+=1
+        ln = re.search("else", line)
+        if ln != None:
+            ln1 = re.search("if", line)
+            if ln1 == None:
+                cyclo+=1
     print("Cyclomatic Complexity: ",cyclo)
     
 
