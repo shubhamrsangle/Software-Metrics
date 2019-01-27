@@ -10,6 +10,7 @@ def driver(l,p):
     NOM(lang,data)
     print(WMC(lang,data))
     fanOut(lang,data)
+    cyclometric(lang,data)
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -126,8 +127,15 @@ def fanOut(lang,data):
                         if fncall != None:
                             fanout += 1
     print('Fan out metrics: '+str(fanout))  
-    
-    
+
+def cyclometric(lang,data):
+    cyclo=0
+    prog = data.split('\r\n')
+    for i,line in enumerate(prog):
+        fndef = re.search("(if|while|for|switch|break|&&|\|\||elif|else)", line)
+        if fndef != None:
+            cyclo+=1
+    print("Cyclomatic Complexity: ",cyclo)
     
 
 '''def LOC(lang,data):
