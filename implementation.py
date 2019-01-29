@@ -10,6 +10,7 @@ def driver(l,p):
     NOM(lang,data)
     #print(WMC(lang,data))
     print(fanout(lang,data))
+    print(fanIn(lang,data))
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -99,6 +100,7 @@ def WMC(lang,data):
             mod=mod.split(' ')
             dic[mod[0]]=len(functions)
         return dic
+
 def cyclometric(lang,data):
     cyclo=0
     prog = data.split('\r\n')
@@ -203,7 +205,30 @@ def fanout(lang,data):
             dic[classname]=fanin
     return dic
             
-        
+def fanIn(lang,data):
+    fanin=0
+    dic={}
+    prog1=data
+    if lang=='java':
+        data.replace("interface","class")
+    if lang=='php':
+        a=re.compile("class.*?}\n*\s*;",re.DOTALL)
+        ans= a.findall(data)
+        for mod in ans:
+            tmp=mod.split(' ')
+            classname=tmp[1]
+            dic[classname]=0
+    else:
+        a=re.compile("class\s*",re.DOTALL)
+        data=a.split(data)
+        data=data[1:]
+        for mod in data:
+            fanin=0
+            prog = mod.split('\n')
+            dic[prog[0][:-1]]=0
+    for key in dic:
+        dic[key]+=prog1.count(key+' ')-prog1.count(key+' {')
+    return dic        
 
 
 '''def LOC(lang,data):
