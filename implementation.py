@@ -11,7 +11,8 @@ def driver(l,p):
     print(WMC(lang,data))
     fanOut(lang,data)
     cyclometric(lang,data)
-
+    print(fanIn(lang,data))
+    
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
         Ncom=data.count('//')+data.count('/*')
@@ -159,7 +160,42 @@ def cyclometric(lang,data):
             if ln1 == None:
                 cyclo+=1
     print("Cyclomatic Complexity: ",cyclo)
-    
+
+def fanIn(lang,data):
+    fanin=0
+    if lang=='java' or lang=='csharp':
+        dic={}
+        data.replace("interface","class")
+        a=re.compile("class\s*",re.DOTALL)
+        data=a.split(data)
+        data=data[1:]
+        for mod in data:
+            fanin=0
+            prog = mod.split('\n')
+            for line in prog:
+                ln = re.search(" new ", line)
+                if ln != None:
+                    fanin+=1
+                if lang=='java':
+                    ln = re.search("\.newInstance", line)
+                    if ln != None:
+                        fanin+=1
+            dic[prog[0][:-1]]=fanin
+    elif lang=='php':
+        dic={}
+        a=re.compile("class.*?}\n*\s*;",re.DOTALL)
+        ans= a.findall(data)
+        for mod in ans:
+            tmp=mod.split(' ')
+            classname=tmp[1]
+            prog = mod.split('\n')
+            fanin=0
+            for line in prog:
+                ln = re.search(" new ", line)
+                if ln != None:
+                    fanin+=1
+            dic[classname]=fanin
+    return dic
 
 '''def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
