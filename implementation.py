@@ -9,8 +9,11 @@ def driver(l,p):
     LOC(lang,data)
     NOM(lang,data)
     #print(WMC(lang,data))
-    print(fanout(lang,data))
-    print(fanIn(lang,data))
+    fan_out=fanout(lang,data)
+    print(fan_out)
+    fan_in = fanIn(lang,data)
+    print(fan_in)
+    print(henryKafura(fan_in,fan_out))
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -230,6 +233,13 @@ def fanIn(lang,data):
         dic[key]+=prog1.count(key+' ')-prog1.count(key+' {')
     return dic        
 
+def henryKafura(fanin,fanout):
+    for key in fanin:
+        try:
+            h += (fanin[key]*fanout[key])**2
+        except:
+            continue
+    return h
 
 '''def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
