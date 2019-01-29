@@ -18,8 +18,6 @@ Shubham 6. Number of Modules   -------------------completed
 
 Shubham 7. Weighted Methods per Class -----------------completed(All methods of weight 1)
 
-Ayush   8. Rejected Lines
-
 # OO metrics:-
 1. Depth of Inheritence Tree
 2. Number of children
