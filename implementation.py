@@ -8,11 +8,9 @@ def driver(l,p):
     ncom,loc,program=LOC(lang,data)
     LOC(lang,data)
     NOM(lang,data)
-    print(WMC(lang,data))
-    fanOut(lang,data)
-    cyclometric(lang,data)
-    print(fanIn(lang,data))
-    
+    #print(WMC(lang,data))
+    print(fanout(lang,data))
+
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
         Ncom=data.count('//')+data.count('/*')
@@ -57,6 +55,8 @@ def NOM(lang,data):
         return funct,0,0,funct
     elif lang=='python':
         funct=data.count('class ')
+        if funct==0:
+            funct=data.count("def")
         return funct
 
 def WMC(lang,data):
@@ -99,36 +99,6 @@ def WMC(lang,data):
             mod=mod.split(' ')
             dic[mod[0]]=len(functions)
         return dic
-  
-def fanOut(lang,data):
-    n=0
-    fanout=0
-    if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
-        prog = data.split('\r\n')
-        for i,line in enumerate(prog):
-            fndef = re.search("[\w]+\(.*\)\{", line)
-            if fndef != None:
-                for ln in prog[i+1:]:
-                    if ln == '}':
-                        break
-                    else:
-                        fncall = re.search("[\w]+\(.*\);",ln)
-                        if fncall != None:
-                            fanout += 1
-    elif lang=='python':
-        prog = data.split('\r\n')
-        for i,line in enumerate(prog):
-            fndef = re.search("[\w]+\(.*\):", line)
-            if fndef != None:
-                for j in prog[i+1:]:
-                    if j[:1] != '\t':
-                        break
-                    else:
-                        fncall = re.search("[\w]+\(.*\)$",j)
-                        if fncall != None:
-                            fanout += 1
-    print('Fan out metrics: '+str(fanout))  
-
 def cyclometric(lang,data):
     cyclo=0
     prog = data.split('\r\n')
@@ -161,9 +131,45 @@ def cyclometric(lang,data):
                 cyclo+=1
     print("Cyclomatic Complexity: ",cyclo)
 
-def fanIn(lang,data):
-    fanin=0
-    if lang=='java' or lang=='csharp':
+def fanout(lang,data):
+    fanout=0
+    data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
+    data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
+    if lang=='cpp':
+        dic={}
+        a=re.compile("class.*?}\n*\s*;",re.DOTALL)
+        ans= a.findall(data)
+        for mod in ans:
+            tmp=mod.split(' ')
+            classname=tmp[1]
+            c=re.compile("[a-zA-Z]\w*\.[a-zA-Z]\w*")
+            inst=c.findall(mod)
+            allinst=[]
+            for call in inst:
+                hjk=call.split('.')
+                allinst.append(hjk[0])
+            num=len(list(set(allinst)))
+            dic[classname]=num
+        return dic
+    elif lang=='python':
+        dic={}
+        a=re.compile("class\s*",re.DOTALL)
+        data=a.split(data)
+        data=data[1:]
+        for mod in data:
+            ind=mod.index(':')
+            classname=mod[:index]
+            c=re.compile("[a-zA-Z]+\.[a-zA-Z]+")
+            inst=c.findall(mod)
+            allinst=[]
+            for call in inst:
+                hjk=call.split('.')
+                allinst.append(hjk[0])
+            num=len(list(set(allinst)))
+            dic[classname]=num
+        return dic
+    
+    elif lang=='java' or lang=='csharp':
         dic={}
         data.replace("interface","class")
         a=re.compile("class\s*",re.DOTALL)
@@ -196,6 +202,9 @@ def fanIn(lang,data):
                     fanin+=1
             dic[classname]=fanin
     return dic
+            
+        
+
 
 '''def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -249,9 +258,4 @@ def fanIn(lang,data):
             index+=1
         print("Lines Of Codes: ",loc-comment,loc,length-1)
         print("Lines Of Comments: ", comment)'''
-                    
-                    
-                
-                
-        
-    
+             
