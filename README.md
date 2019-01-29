@@ -10,9 +10,9 @@ shubham 2. McCabe's Cyclomatic Complexity        -----------------completed
 
 shubham 3. Comment Lines        -----------------completed 
 
-Ayush   4. Fan-in, Fan-out
+Ayush   4. Fan-in, Fan-out      -----------------completed
 
-Ayush   5. Henry-Kafura Measure
+Ayush   5. Henry-Kafura Measure    -----------------completed
 
 Shubham 6. Number of Modules   -------------------completed
 
