@@ -7,7 +7,10 @@ for line in lines:
         lang[data[i].lower()]=data[0].lower()
 
 def language(s):
-    return lang[s.lower()]
+    try:
+        return lang[s.lower()]
+    except:
+        return -1
 
 
 
