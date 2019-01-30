@@ -3,38 +3,14 @@ Language Independent Counting metrics and Object Oriented Metrics implemented in
 
 Software Metrics to be implemented (Language Independent):
 
-# Counting metrics:-
-shubham 1. Lines Of Code (LOC)  -----------------completed 
-
-shubham 2. McCabe's Cyclomatic Complexity        -----------------completed 
-
-shubham 3. Comment Lines        -----------------completed 
-
-Ayush   4. Fan-in, Fan-out      -----------------completed
-
-Ayush   5. Henry-Kafura Measure    -----------------completed
-
-Shubham 6. Number of Modules   -------------------completed
-
-Shubham 7. Weighted Methods per Class -----------------completed(All methods of weight 1)
-
-# OO metrics:-
-1. Depth of Inheritence Tree
-2. Number of children
-3. Coupling and cohesion
-4. Response for Class
-5. Number of Public Methods
-6. Data Access Metric
-7. Measure of Aggregation
-8. Measure of Functional Abstraction
-9. Average Method Complexity
-
-# Papers for further work:
-
-1:-Using Object-Oriented Design Metrics to Predict
-Software Defects
-Marian JURECZKO2, Diomidis D. SPINELLIS3
-
-2:-Predicting Software Metrics at Design Time
-Wolfgang Holz1, Rahul Premraj, Thomas Zimmermann2, and Andreas Zeller
-http://thomas-zimmermann.com/publications/files/holz-profes-2008.pdf
+# HOW TO RUN:
+ 
+ # For Windows:
+     Install Python 2.X  X>=6
+     No External module needed to be install. 
+     Download given repository.
+     Open and run file gui.py
+     Enter path in textbox and you can see software metrics on screen
+     metric.py - is driver program
+     lang_find.py  - detects language of file
+     implementation.py-- Implements all functions
