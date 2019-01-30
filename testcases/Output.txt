@@ -1,35 +1,39 @@
 Test case 1:
-(1, 28)
-(5)
-('Cyclomatic Complexity: ', 6)
-None
-{}
-{}
-0
+Comment Lines = 1
+LOC = 28
+NOM = 5
+Cyclomatic Complexity = 6
+WMC = None
+Fan-In = {}
+Fan-Out = {}
+Henry Kafura = 0
 
 Test case 2:
-(0, 41)
-(3)
-('Cyclomatic Complexity: ', 1)
-None
-{'Fibonacci2 ': 3, 'Fibonacci1 ': 0, 'Fibonacci ': 1}
-{'Fibonacci2 ': 1, 'Fibonacci1 ': 2, 'Fibonacci ': 1}
-10
+Comment Lines = 0
+LOC = 41
+NOM = 3
+Cyclomatic Complexity = 1
+WMC = None
+Fan-In = {'Fibonacci2 ': 3, 'Fibonacci1 ': 0, 'Fibonacci ': 1}
+Fan-Out = {'Fibonacci2 ': 1, 'Fibonacci1 ': 2, 'Fibonacci ': 1}
+Henry Kafura = 10
 
 Test case 3:
-(6, 35)
-(4)
-('Cyclomatic Complexity: ', 5)
-None
-{}
-{}
-0
+Comment Lines = 6
+LOC = 35
+NOM = 4
+Cyclomatic Complexity = 5
+WMC = None
+Fan-In = {}
+Fan-Out = {}
+Henry Kafura = 0
 
 Test case 4:
-(1, 34)
-(0, 0, 0, 0)
-('Cyclomatic Complexity: ', 3)
-None
-{}
-{}
-0
+Comment Lines = 1
+LOC = 34
+NOM = 0
+Cyclomatic Complexity = 3
+WMC = None
+Fan-In = {}
+Fan-Out = {}
+Henry Kafura = 0
