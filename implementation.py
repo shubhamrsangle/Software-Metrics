@@ -9,15 +9,7 @@ def driver(l,p):
         print("No File/Directory Found")
         return 0
     data=f.read()
-    ncom,loc=LOC(lang,data)
-    nom,nstruct,nclass,outmethods=NOM(lang,data)
-    wmc=WMC(lang,data)
-    cyclo=cyclometric(lang,data)
-    fan_out=fanout(lang,data)
-    #print(fan_out)
-    fan_in = fanIn(lang,data)
-    #print(fan_in)
-    henry_k=henryKafura(fan_in,fan_out)
+    return l, data
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
