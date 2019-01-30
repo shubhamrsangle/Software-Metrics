@@ -11,10 +11,10 @@ Software Metrics to be implemented (Language Independent):
 # For Ubuntu:
      download python 2.X X>=6
      download Tkinter from sudo apt
-     
-Download given repository.
-Open and run file gui.py
-Enter path in textbox and you can see software metrics on screen
-metric.py - is driver program
-lang_find.py  - detects language of file
-implementation.py-- Implements all functions
+# About Repo:
+     Download given repository.
+     Open and run file gui.py
+     Enter path in textbox and you can see software metrics on screen
+     metric.py - is driver program
+     lang_find.py  - detects language of file
+     implementation.py-- Implements all functions
