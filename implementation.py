@@ -3,17 +3,21 @@ import re
 def driver(l,p):
     lang=l
     path=p
-    f=open(path)
+    try:
+        f=open(path)
+    except:
+        print("No File/Directory Found")
+        return 0
     data=f.read()
-    ncom,loc,program=LOC(lang,data)
-    LOC(lang,data)
-    NOM(lang,data)
-    #print(WMC(lang,data))
+    ncom,loc=LOC(lang,data)
+    nom,nstruct,nclass,outmethods=NOM(lang,data)
+    wmc=WMC(lang,data)
+    cyclo=cyclometric(lang,data)
     fan_out=fanout(lang,data)
-    print(fan_out)
+    #print(fan_out)
     fan_in = fanIn(lang,data)
-    print(fan_in)
-    print(henryKafura(fan_in,fan_out))
+    #print(fan_in)
+    henry_k=henryKafura(fan_in,fan_out)
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -23,7 +27,7 @@ def LOC(lang,data):
         program=program.replace('{',';')
         program=program.strip().split(';')
         LOC=len(program)-1
-        return Ncom,LOC,program[:-1]
+        return Ncom,LOC
     elif lang=='python':
         Ncom=(data.count("'''")//2)+data.count("#")
         program=re.sub(re.compile("\'\'\'.*?\'\'\'",re.DOTALL),"",data)
@@ -31,7 +35,7 @@ def LOC(lang,data):
         program=program.replace("\t","")
         program=program.strip().split('\n')
         LOC=len(program)-1
-        return Ncom,LOC,program[:-1]
+        return Ncom,LOC
 
 def NOM(lang,data):
     data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
@@ -61,16 +65,21 @@ def NOM(lang,data):
         funct=data.count('class ')
         if funct==0:
             funct=data.count("def")
-        return funct
+        return funct,0,funct,0
 
 def WMC(lang,data):
+    data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
+    data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
     if lang=='python':
         dic={}
         a=re.compile("class\s*",re.DOTALL)
         data=a.split(data)
         data=data[1:]
         for mod in data:
-            ind=mod.index(':')
+            try:
+                ind=mod.index(':')
+            except:
+                continue
             classname=mod[:index]
             dic[classname]=mod.count('def')
         return dic
@@ -105,6 +114,8 @@ def WMC(lang,data):
         return dic
 
 def cyclometric(lang,data):
+    data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
+    data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
     cyclo=0
     prog = data.split('\r\n')
     for i,line in enumerate(prog):
@@ -137,6 +148,8 @@ def cyclometric(lang,data):
     print("Cyclomatic Complexity: ",cyclo)
 
 def fanout(lang,data):
+    data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
+    data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
     fanout=0
     data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
     data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
@@ -162,7 +175,10 @@ def fanout(lang,data):
         data=a.split(data)
         data=data[1:]
         for mod in data:
-            ind=mod.index(':')
+            try:
+                ind=mod.index(':')
+            except:
+                continue
             classname=mod[:index]
             c=re.compile("[a-zA-Z]+\.[a-zA-Z]+")
             inst=c.findall(mod)
@@ -209,6 +225,8 @@ def fanout(lang,data):
     return dic
             
 def fanIn(lang,data):
+    data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
+    data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
     fanin=0
     dic={}
     prog1=data
@@ -234,6 +252,7 @@ def fanIn(lang,data):
     return dic        
 
 def henryKafura(fanin,fanout):
+    h=0
     for key in fanin:
         try:
             h += (fanin[key]*fanout[key])**2
@@ -293,4 +312,3 @@ def henryKafura(fanin,fanout):
             index+=1
         print("Lines Of Codes: ",loc-comment,loc,length-1)
         print("Lines Of Comments: ", comment)'''
-             
