@@ -1,6 +1,7 @@
 import re
 
 def driver(l,p):
+    dic={}
     lang=l
     path=p
     try:
@@ -9,7 +10,14 @@ def driver(l,p):
         print("No File/Directory Found")
         return 0
     data=f.read()
-    return lang, data
+    dic["LOC"]=list(LOC(lang,data))
+    dic["NOM"]=list(NOM(lang,data))
+    dic["WMC"]=WMC(lang,data)
+    dic["cyclometric"]=cyclometric(lang,data)
+    dic["fanout"]=fanOut(lang,data)
+    dic["fanin"]=fanIn(lang,data)
+    dic["hk"]=henryKafura(lang,data)
+    return dic
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -137,7 +145,8 @@ def cyclometric(lang,data):
             ln1 = re.search("if", line)
             if ln1 == None:
                 cyclo+=1
-    print("Cyclomatic Complexity: ",cyclo)
+    return cyclo
+    #print("Cyclomatic Complexity: ",cyclo)
 
 def fanOut(lang,data):
     data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
