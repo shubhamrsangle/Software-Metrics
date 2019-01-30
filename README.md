@@ -5,9 +5,11 @@ Software Metrics to be implemented (Language Independent):
 
 # HOW TO RUN:
  
- # For Windows:
+ # For Windows:(Works for entire directory)
      Install Python 2.X  X>=6
      No External module needed to be install. 
+ # For Ubuntu:(Works only for single file)
+    Install Python2.X and Tkinter 
 # About Repo:
      Download given repository.
      Open and run file gui.py
