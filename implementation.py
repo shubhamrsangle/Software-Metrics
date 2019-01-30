@@ -9,7 +9,7 @@ def driver(l,p):
         print("No File/Directory Found")
         return 0
     data=f.read()
-    return l, data
+    return lang, data
 
 def LOC(lang,data):
     if lang=='c' or lang=='cpp' or lang=='java' or lang=='csharp' or lang=='php' or lang=='javascript':
@@ -139,7 +139,7 @@ def cyclometric(lang,data):
                 cyclo+=1
     print("Cyclomatic Complexity: ",cyclo)
 
-def fanout(lang,data):
+def fanOut(lang,data):
     data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
     data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
     fanout=0
@@ -219,7 +219,6 @@ def fanout(lang,data):
 def fanIn(lang,data):
     data=re.sub(re.compile("/\*.*?\*/",re.DOTALL ) ,"" ,data)
     data=re.sub(re.compile("//.*?\n" ) ,"" ,data)
-    fanin=0
     dic={}
     prog1=data
     if lang=='java':
@@ -230,20 +229,22 @@ def fanIn(lang,data):
         for mod in ans:
             tmp=mod.split(' ')
             classname=tmp[1]
-            dic[classname]=0
+            dic[classname]=-1
     else:
         a=re.compile("class\s*",re.DOTALL)
         data=a.split(data)
         data=data[1:]
         for mod in data:
-            fanin=0
             prog = mod.split('\n')
-            dic[prog[0][:-1]]=0
+            dic[prog[0][:-1]]=-1
     for key in dic:
-        dic[key]+=prog1.count(key+' ')-prog1.count(key+' {')
-    return dic        
+        print(prog1.count(key))
+        dic[key]+=prog1.count(key)
+    return dic
 
-def henryKafura(fanin,fanout):
+def henryKafura(lang,data):
+    fanin=fanIn(lang,data)
+    fanout=fanOut(lang,data)
     h=0
     for key in fanin:
         try:

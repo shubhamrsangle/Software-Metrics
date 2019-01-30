@@ -75,7 +75,7 @@ def click():
 		text.insert(INSERT, txt)
 		text.insert(INSERT, str(Ans))
 		text.insert(END, ' \n')
-		Ans = fanout(lang,data)
+		Ans = fanOut(lang,data)
 		txt = 'Fan-Out = '
 		text.insert(INSERT, txt)
 		text.insert(INSERT, str(Ans))
