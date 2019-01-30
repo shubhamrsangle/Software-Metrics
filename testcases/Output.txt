@@ -1,0 +1,35 @@
+Test case 1:
+(1, 28)
+(5)
+('Cyclomatic Complexity: ', 6)
+None
+{}
+{}
+0
+
+Test case 2:
+(0, 41)
+(3)
+('Cyclomatic Complexity: ', 1)
+None
+{'Fibonacci2 ': 3, 'Fibonacci1 ': 0, 'Fibonacci ': 1}
+{'Fibonacci2 ': 1, 'Fibonacci1 ': 2, 'Fibonacci ': 1}
+10
+
+Test case 3:
+(6, 35)
+(4)
+('Cyclomatic Complexity: ', 5)
+None
+{}
+{}
+0
+
+Test case 4:
+(1, 34)
+(0, 0, 0, 0)
+('Cyclomatic Complexity: ', 3)
+None
+{}
+{}
+0
