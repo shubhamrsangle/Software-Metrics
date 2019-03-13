@@ -89,7 +89,22 @@ $min_int = -0x80000000;
  mths[k] = mth; 
 			}
 		}
- var bss = null; 
+ var bss = null;
+		else if ($p['bool'](($p['bool']($or15=$p['op_eq'](lang, 'java'))?$or15:$p['op_eq'](lang, 'csharp')))) {
+			dic = $p['dict']([]);
+			data['$$replace']('interface', 'class');
+			a = $m['re']['compile']('class\\s*', $p['getattr']($m['re'], 'DOTALL'));
+			data = a['$$split'](data);
+			data = $p['__getslice'](data, 1, null);
+			$iter3_iter = data;
+			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
+			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
+				mod = $iter3_nextval['$nextval'];
+				a = $m['re']['compile']('\\(.*?\\)\n*\\s*{', $p['getattr']($m['re'], 'DOTALL'));
+				functions = a['findall'](mod);
+				mod = mod['$$split'](' ');
+				dic['__setitem__'](mod['__getitem__'](0), $p['len'](functions));
+			}
 		if ($p['bool'](bases)) {
 bss = bases['__array'];
 		}
@@ -111,6 +126,21 @@ bss = bases['__array'];
 				var self = arguments[0];
 				name = arguments[1];
 				value = arguments[2];
+			}
+			else if ($p['bool'](($p['bool']($or15=$p['op_eq'](lang, 'java'))?$or15:$p['op_eq'](lang, 'csharp')))) {
+			dic = $p['dict']([]);
+			data['$$replace']('interface', 'class');
+			a = $m['re']['compile']('class\\s*', $p['getattr']($m['re'], 'DOTALL'));
+			data = a['$$split'](data);
+			data = $p['__getslice'](data, 1, null);
+			$iter3_iter = data;
+			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
+			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
+				mod = $iter3_nextval['$nextval'];
+				a = $m['re']['compile']('\\(.*?\\)\n*\\s*{', $p['getattr']($m['re'], 'DOTALL'));
+				functions = a['findall'](mod);
+				mod = mod['$$split'](' ');
+				dic['__setitem__'](mod['__getitem__'](0), $p['len'](functions));
 			}
 
 
