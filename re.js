@@ -42,25 +42,7 @@ $pyjs['loaded_modules']['re'] = function (__mod_name__) {
 	};
 	$m['search']['__name__'] = 'search';
 
-	$m['search']['__bind_type__'] = 0;
-	$m['search']['__args__'] = [null,null,['pattern'],['string'],['flags', 0]];
-	$m['sub'] = function(pattern, repl, string, count) {
-		if (typeof count == 'undefined') count=arguments['callee']['__args__'][5][1];
-
-		return $m['compile'](pattern, 0)['sub'](repl, string, count);
-	};
-	$m['sub']['__name__'] = 'sub';
-
-	$m['sub']['__bind_type__'] = 0;
-	$m['sub']['__args__'] = [null,null,['pattern'],['repl'],['string'],['count', 0]];
-	$m['subn'] = function(pattern, repl, string, count) {
-		if (typeof count == 'undefined') count=arguments['callee']['__args__'][5][1];
-
-		return $m['compile'](pattern, 0)['subn'](repl, string, count);
-	};
-	$m['subn']['__name__'] = 'subn';
-
-	$m['subn']['__bind_type__'] = 0;
+	
 	$m['subn']['__args__'] = [null,null,['pattern'],['repl'],['string'],['count', 0]];
 	$m['$$split'] = function(pattern, string, maxsplit) {
 		if (typeof maxsplit == 'undefined') maxsplit=arguments['callee']['__args__'][4][1];
@@ -119,13 +101,9 @@ $pyjs['loaded_modules']['re'] = function (__mod_name__) {
 	$m['template']['__bind_type__'] = 0;
 	$m['template']['__args__'] = [null,null,['pattern'],['flags', 0]];
 	$m['_alphanum'] = $p['dict']([]);
-	$iter1_iter = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890';
-	$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
-	while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
-		$m['c'] = $iter1_nextval['$nextval'];
-		$m['_alphanum']['__setitem__']($m['c'], 1);
-	}
-	delete $m['c'];
+	
+	
+	
 	$m['escape'] = function(pattern) {
 		var c,$iter2_nextval,$iter2_type,$iter2_iter,i,$iter2_idx,$add2,s,$add1,alphanum,$iter2_array;
 		s = $p['list'](pattern);
@@ -162,6 +140,13 @@ $pyjs['loaded_modules']['re'] = function (__mod_name__) {
 		if ($p['bool']((p !== null))) {
 			return p;
 		}
+		$iter1_iter = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890';
+	$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+	while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
+		$m['c'] = $iter1_nextval['$nextval'];
+		$m['_alphanum']['__setitem__']($m['c'], 1);
+	}
+	delete $m['c'];
 		flgs = '';
 		while ($p['bool'](true)) {
 			m = $m['__inline_flags_re__']['Exec'](pat);
