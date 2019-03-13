@@ -34,22 +34,7 @@ $pyjs['loaded_modules']['implementation'] = function (__mod_name__) {
 		dic['__setitem__']('hk', (typeof henryKafura == "undefined"?$m['henryKafura']:henryKafura)(lang, data));
 		return dic;
 	};
-	$m['driver']['__name__'] = 'driver';
-
-	$m['driver']['__bind_type__'] = 0;
-	$m['driver']['__args__'] = [null,null,['l'],['p']];
-	$m['LOC'] = function(lang, data) {
-		var $or4,program,$or6,$or1,$or5,$or3,$or2,$add2,$add3,LOC,$add1,Ncom,$floordiv1,$add4,$sub3,$sub2,$sub1,$sub4,$floordiv2;
-		if ($p['bool'](($p['bool']($or1=$p['op_eq'](lang, 'c'))?$or1:($p['bool']($or2=$p['op_eq'](lang, 'cpp'))?$or2:($p['bool']($or3=$p['op_eq'](lang, 'java'))?$or3:($p['bool']($or4=$p['op_eq'](lang, 'csharp'))?$or4:($p['bool']($or5=$p['op_eq'](lang, 'php'))?$or5:$p['op_eq'](lang, 'javascript')))))))) {
-			Ncom = $p['__op_add']($add1=data['count']('//'),$add2=data['count']('/*'));
-			program = $m['re']['sub']($m['re']['compile']('/\\*.*?\\*/', $p['getattr']($m['re'], 'DOTALL')), '', data);
-			program = $m['re']['sub']($m['re']['compile']('//.*?\n'), '', program);
-			program = program['$$replace']('{', ';');
-			program = program['strip']()['$$split'](';');
-			LOC = $p['__op_sub']($sub1=$p['len'](program),$sub2=1);
-			return $p['tuple']([Ncom, LOC]);
-		}
-		else if ($p['bool']($p['op_eq'](lang, 'python'))) {
+	if ($p['bool']($p['op_eq'](lang, 'python'))) {
 			Ncom = $p['__op_add']($add3=(typeof ($floordiv1=data['count']("'''"))==typeof ($floordiv2=2) && typeof $floordiv1=='number' && $floordiv2 !== 0?
 				Math['floor']($floordiv1/$floordiv2):
 				$p['op_floordiv']($floordiv1,$floordiv2)),$add4=data['count']('#'));
@@ -103,75 +88,15 @@ $pyjs['loaded_modules']['implementation'] = function (__mod_name__) {
 		}
 		return null;
 	};
-	$m['NOM']['__name__'] = 'NOM';
+$m['cyclometric']['__name__'] = 'cyclometric';
 
-	$m['NOM']['__bind_type__'] = 0;
-	$m['NOM']['__args__'] = [null,null,['lang'],['data']];
-	$m['WMC'] = function(lang, data) {
-		var $iter3_array,$iter1_iter,classname,d,ans,ind,$iter2_type,$sub8,tmp,functions,$iter3_idx,$iter2_iter,$iter3_nextval,$sub9,$pyjs_try_err,$iter1_array,$sub7,$iter3_iter,a,$iter1_nextval,$sub10,$iter2_idx,$add11,$add12,$iter3_type,mod,c,$iter2_nextval,$iter1_type,dic,$or15,$or14,$or16,$iter1_idx,$or13,$or12,functions1,$iter2_array;
-		data = $m['re']['sub']($m['re']['compile']('/\\*.*?\\*/', $p['getattr']($m['re'], 'DOTALL')), '', data);
-		data = $m['re']['sub']($m['re']['compile']('//.*?\n'), '', data);
-		if ($p['bool']($p['op_eq'](lang, 'python'))) {
-			dic = $p['dict']([]);
-			a = $m['re']['compile']('class\\s*', $p['getattr']($m['re'], 'DOTALL'));
-			data = a['$$split'](data);
-			data = $p['__getslice'](data, 1, null);
-			$iter1_iter = data;
-			$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
-			while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
-				mod = $iter1_nextval['$nextval'];
-				try {
-					ind = mod['index'](':');
-				} catch($pyjs_try_err) {
-					var $pyjs_try_err_name = (typeof $pyjs_try_err['__name__'] == 'undefined' ? $pyjs_try_err['name'] : $pyjs_try_err['__name__'] );
-					$pyjs['__last_exception__'] = {'error': $pyjs_try_err, 'module': $m};
-					if (true) {
-						continue;
-					}
-				}
-				classname = $p['__getslice'](mod, 0, (typeof index == "undefined"?$m['index']:index));
-				dic['__setitem__'](classname, mod['count']('def'));
-			}
-			return dic;
-		}
-		else if ($p['bool'](($p['bool']($or12=$p['op_eq'](lang, 'c'))?$or12:($p['bool']($or13=$p['op_eq'](lang, 'cpp'))?$or13:$p['op_eq'](lang, 'php'))))) {
-			dic = $p['dict']([]);
-			a = $m['re']['compile']('class.*?}\n*\\s*;', $p['getattr']($m['re'], 'DOTALL'));
-			ans = a['findall'](data);
-			$iter2_iter = ans;
-			$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
-			while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
-				mod = $iter2_nextval['$nextval'];
-				tmp = mod['$$split'](' ');
-				classname = tmp['__getitem__'](1);
-				c = $m['re']['compile']('\\(.*?\\)\n*\\s*;', $p['getattr']($m['re'], 'DOTALL'));
-				functions = c['findall'](mod);
-				d = $m['re']['compile']('\\(.*?\\)\n*\\s*{', $p['getattr']($m['re'], 'DOTALL'));
-				functions1 = d['findall'](mod);
-				dic['__setitem__'](classname, $p['__op_sub']($sub9=$p['__op_sub']($sub7=$p['__op_add']($add11=$p['len'](functions),$add12=$p['len'](functions1)),$sub8=mod['count']('scanf')),$sub10=mod['count']('printf')));
-			}
-			return dic;
-		}
+	
 		else if ($p['bool']($p['op_eq'](lang, 'javascript'))) {
 			dic = $p['dict']([]);
 			dic['__setitem__']('OUTSIDE', data['count']('function '));
 			return dic;
 		}
-		else if ($p['bool'](($p['bool']($or15=$p['op_eq'](lang, 'java'))?$or15:$p['op_eq'](lang, 'csharp')))) {
-			dic = $p['dict']([]);
-			data['$$replace']('interface', 'class');
-			a = $m['re']['compile']('class\\s*', $p['getattr']($m['re'], 'DOTALL'));
-			data = a['$$split'](data);
-			data = $p['__getslice'](data, 1, null);
-			$iter3_iter = data;
-			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
-			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
-				mod = $iter3_nextval['$nextval'];
-				a = $m['re']['compile']('\\(.*?\\)\n*\\s*{', $p['getattr']($m['re'], 'DOTALL'));
-				functions = a['findall'](mod);
-				mod = mod['$$split'](' ');
-				dic['__setitem__'](mod['__getitem__'](0), $p['len'](functions));
-			}
+		
 			return dic;
 		}
 		return null;
@@ -230,8 +155,22 @@ $pyjs['loaded_modules']['implementation'] = function (__mod_name__) {
 		}
 		return cyclo;
 	};
-	$m['cyclometric']['__name__'] = 'cyclometric';
-
+else if ($p['bool'](($p['bool']($or15=$p['op_eq'](lang, 'java'))?$or15:$p['op_eq'](lang, 'csharp')))) {
+			dic = $p['dict']([]);
+			data['$$replace']('interface', 'class');
+			a = $m['re']['compile']('class\\s*', $p['getattr']($m['re'], 'DOTALL'));
+			data = a['$$split'](data);
+			data = $p['__getslice'](data, 1, null);
+			$iter3_iter = data;
+			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
+			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
+				mod = $iter3_nextval['$nextval'];
+				a = $m['re']['compile']('\\(.*?\\)\n*\\s*{', $p['getattr']($m['re'], 'DOTALL'));
+				functions = a['findall'](mod);
+				mod = mod['$$split'](' ');
+				dic['__setitem__'](mod['__getitem__'](0), $p['len'](functions));
+			}
+	
 	$m['cyclometric']['__bind_type__'] = 0;
 	$m['cyclometric']['__args__'] = [null,null,['lang'],['data']];
 	$m['fanOut'] = function(lang, data) {
