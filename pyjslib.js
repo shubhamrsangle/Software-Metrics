@@ -13,15 +13,6 @@ $pyjs['loaded_modules']['pyjslib'] = function (__mod_name__) {
 	$m['dynamic'] = null;
 	$m['Ellipsis'] = null;
 
-var $max_float_int = 1;
-for (var i = 0; i < 1000; i++) {
-    $max_float_int *= 2;
-    if ($max_float_int + 1 == $max_float_int) {
-        break;
-    }
-}
-$max_int = 0x7fffffff;
-$min_int = -0x80000000;
 
 	$m['_handle_exception'] = function(err) {
     $pyjs['loaded_modules']['sys']['save_exception_stack']();
@@ -107,6 +98,16 @@ $min_int = -0x80000000;
 			}
 		if ($p['bool'](bases)) {
 bss = bases['__array'];
+			var $max_float_int = 1;
+for (var i = 0; i < 1000; i++) {
+    $max_float_int *= 2;
+    if ($max_float_int + 1 == $max_float_int) {
+        break;
+    }
+}
+$max_int = 0x7fffffff;
+$min_int = -0x80000000;
+
 		}
  return $pyjs_type(clsname, bss, mths); 
 	};
