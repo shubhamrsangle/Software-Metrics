@@ -1,3 +1,7 @@
+# Javascript Version:
+
+Not able to debug. Code is not working.
+
 # Software-Metrics
 Language Independent Counting metrics and Object Oriented Metrics implemented in Python
 
